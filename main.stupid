@@ -1,0 +1,5 @@
+out Hello World!
+declare x 27
+out x
+in x
+out x
