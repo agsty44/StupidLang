@@ -1,5 +1,7 @@
 out Hello World!
 declare x 27
-out x
-in x
-out x
+in y
+if x = y
+out The values are the same.
+out Program should skip this line if condition not met.
+end

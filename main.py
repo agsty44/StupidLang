@@ -47,6 +47,14 @@ def declareFunc(varName, content):
     global stackMemory
     stackMemory[varName] = content
 
+def ifFunc(var1, comparator, var2):
+    global lineNumber
+    match comparator:
+        case "=":
+            if not var1 == var2:
+                # we increase the iterator to skip through the code
+                lineNumber = lines.index("end", lineNumber) + 1
+
 def main():
     while lineNumber < len(lines):
         newCommand()
@@ -59,5 +67,7 @@ def main():
                 inFunc(arguments[0], input())
             case "declare":
                 declareFunc(arguments[0], arguments[1])
+            case "if":
+                ifFunc(stackMemory[arguments[0]], arguments[1], stackMemory[arguments[2]])
 
 main()
