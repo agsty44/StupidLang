@@ -1,7 +1,14 @@
 out Hello World!
-declare x 27
+in a
+in x
 in y
+in z
 if x = y
 out The values are the same.
+if x = z
 out Program should skip this line if condition not met.
+end
+if x = a
+out this shouldnt happen
+end
 end

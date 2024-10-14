@@ -29,15 +29,19 @@ def newCommand():
 def interpret():
     global arguments, keyword, parsedCommand
     parsedCommand = command.split()
+    if command == "" or command [0] in [" ", "    "]:
+        print("indentation and blank lines are VERBOTEN")
+        exit()
+    
     keyword = parsedCommand[0]
     parsedCommand.pop(0)
     arguments = parsedCommand.copy()
 
 def outFunc(text):
-    if " ".join(text) not in stackMemory:
-        print(" ".join(text))
-    else:
-        print(stackMemory[" ".join(text)])
+    for value in arguments:
+        if value in stackMemory:
+            text[text.index(value)] = stackMemory[value]
+    print(" ".join(text))
 
 def inFunc(varName, content):
     global stackMemory
@@ -51,7 +55,7 @@ def ifFunc(var1, comparator, var2):
     global lineNumber
     match comparator:
         case "=":
-            if not var1 == var2:
+            if var1 != var2:
                 # we increase the iterator to skip through the code
                 lineNumber = lines.index("end", lineNumber) + 1
 
@@ -68,6 +72,13 @@ def main():
             case "declare":
                 declareFunc(arguments[0], arguments[1])
             case "if":
-                ifFunc(stackMemory[arguments[0]], arguments[1], stackMemory[arguments[2]])
+                ifFunc(stackMemory[arguments[0]], arguments[1],
+                       stackMemory[arguments[2]])
+            case "end":
+                pass
+            case _:
+                print("what are you doing??? we dont support comments")
+                print("all lines must be keywords and cannot be blank")
+                exit()
 
 main()
