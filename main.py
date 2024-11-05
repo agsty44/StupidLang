@@ -59,6 +59,13 @@ def ifFunc(var1, comparator, var2):
                 # we increase the iterator to skip through the code
                 lineNumber = lines.index("end", lineNumber) + 1
 
+def coredumpFunc():
+    f = open("traceback.txt", "w")
+    for item in stackMemory:
+        variableDump = item + ": " + stackMemory[item] + "\n"
+        f.write(variableDump)
+    f.close()
+
 def main():
     while lineNumber < len(lines):
         newCommand()
@@ -76,6 +83,8 @@ def main():
                        stackMemory[arguments[2]])
             case "end":
                 pass
+            case "coredump":
+                coredumpFunc()
             case _:
                 print("what are you doing??? we dont support comments")
                 print("all lines must be keywords and cannot be blank")
